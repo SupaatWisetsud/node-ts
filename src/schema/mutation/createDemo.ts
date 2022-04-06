@@ -1,6 +1,6 @@
 import models from '../../models';
 import types from '../types';
-import { mutationWithClientMutationId } from 'graphql-relay';
+const { mutationWithClientMutationId } = require('graphql-relay');
 
 import {
     GraphQLString,
@@ -13,18 +13,16 @@ const createDemo = mutationWithClientMutationId({
         name: { type: new GraphQLNonNull(GraphQLString) },
     },
     outputFields: {
-        project: {
+        demo: {
             type: types.DemoType,
-            resolve: (payload) => payload,
+            resolve: (payload: any) => payload,
         }
     },
     mutateAndGetPayload: async (params: {name: string}) => {
         const { name } = params;
-
         const result = await models.Demo.create({
             name
         });
-
         return result
     }
 });

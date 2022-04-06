@@ -1,6 +1,8 @@
 import models from '../../models';
 import types from '../types';
-import { resolver } from 'graphql-sequelize';
+
+const {resolver} = require('graphql-sequelize');
+
 import {
     GraphQLList
 } from 'graphql';
@@ -11,11 +13,10 @@ const {
 const {
     DemoType
 } = types;
-
-
+console.log(models)
 export default {
-    demo_list: {
+    demo: {
         type: new GraphQLList(DemoType),
-        resolver: resolver(Demo)
+        resolve: resolver(Demo)
     }
 };  

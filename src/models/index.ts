@@ -2,25 +2,20 @@ import fs from 'fs';
 import path from 'path';
 import sequelize from '../database/dbconfig';
 import Sequelize from 'sequelize';
-import {createNodeInterface} from 'graphql-sequelize';
 
-const db: any = {
-  sequelize,
-};
+const { createNodeInterface } = require('graphql-sequelize');
 
-fs
-  .readdirSync(__dirname)
-  .filter(file =>
-    path.extname(file) === '.js' &&
-    file !== 'index.js',
-  )
-  .forEach((file) => {
-    const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
+const db: any = {};
+const basename = path.basename(__filename);
+fs.readdirSync(__dirname)
+  .filter((file: string) => (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.ts'))
+  .forEach((file: string) => {
+    const model = require(path.join(__dirname, file)).default(sequelize, Sequelize.DataTypes);
     db[model.name] = model;
   });
 
-Object.keys(db).forEach((modelName) => {
-  if ('associate' in db[modelName]) {
+Object.keys(db).forEach(modelName => {
+  if (db[modelName].associate) {
     db[modelName].associate(db);
   }
 });
@@ -35,6 +30,6 @@ export {
   nodeInterface,
   nodeField,
   nodeTypeMapper,
-} 
+}
 
 export default db;

@@ -14,7 +14,7 @@ app.get('/schema', function (_, res: Response) {
     res.download(file);
 });
 
-const apollo: ApolloServer<ExpressContext> = new ApolloServer({
+const apollo: ApolloServer = new ApolloServer({
     schema: schema,
     context: async (context: ExpressContext) => {
         const { req } = context;

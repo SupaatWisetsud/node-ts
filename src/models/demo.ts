@@ -1,7 +1,7 @@
 import Sequelize, { Model } from 'sequelize'
 
 class Demo extends Model {
-    static tableName = 'rcm_demo';
+    static tableName = 'demo';
 }
 
 const schema = {
@@ -13,9 +13,11 @@ const schema = {
     },
     name: {
         type: Sequelize.STRING,
+        allowNull: false,
     }
 };
 
+//@ts-ignore
 export default (sequelize) => {
     Demo.init(schema, {
         sequelize,

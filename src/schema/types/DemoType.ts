@@ -1,5 +1,4 @@
-import { nodeInterface } from '../../models'
-
+import models, { nodeInterface } from '../../models'
 import {
     GraphQLInt,
     GraphQLNonNull,
@@ -7,13 +6,17 @@ import {
     GraphQLString,
 } from 'graphql';
 
+const { globalIdField } = require('graphql-relay');
+
 const DemoType = new GraphQLObjectType({
     name: "DemoType",
     fields: {
-        id: {
-           type: new GraphQLNonNull(GraphQLInt) 
+        id: globalIdField(models.Demo.tableName),
+        demo_no: {
+            type: new GraphQLNonNull(GraphQLInt),
+            resolve:(obj)=>obj.id
         },
-        name: {type: GraphQLString}
+        name: { type: GraphQLString }
     },
     interfaces: [nodeInterface]
 });
