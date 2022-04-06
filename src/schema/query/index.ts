@@ -1,12 +1,12 @@
-import models,{nodeField} from '../../models';
-import {GraphQLObjectType} from 'graphql';
+import { nodeField } from '../../models';
+import { GraphQLObjectType } from 'graphql';
 
-import masterdata from './masterdata';
+import demo from './demo';
 
 export default new GraphQLObjectType({
-    name: 'RootQueryType',
-    fields: {
-      ...masterdata,
-      node: nodeField
-    }
+  name: 'RootQueryType',
+  fields: {
+    ...demo,
+    node: nodeField
+  }
 })

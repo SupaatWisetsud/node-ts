@@ -34,5 +34,5 @@
     "include": [
         "./src/**/*.ts",
         ".sequelizerc"
-    ]
+, "src/models/index.js"    ]
 }

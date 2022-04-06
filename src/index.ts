@@ -31,7 +31,7 @@ const apollo: ApolloServer<ExpressContext> = new ApolloServer({
     introspection: true,
 })
 
-apollo.applyMiddleware({ app,path:'/graphql'});
+apollo.applyMiddleware({ app, path: '/graphql' });
 app.listen(process.env.APP_PORT, () => {
-    console.log('RCM Server start! type http://localhost:'+process.env.APP_PORT+'/graphql to run queries!');
+    console.log('RCM Server start! type http://localhost:' + process.env.APP_PORT + '/graphql to run queries!');
 });

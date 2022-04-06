@@ -1,9 +1,10 @@
 import fs from 'fs';
 import path from 'path';
 import sequelize from '../database/dbconfig';
+import Sequelize from 'sequelize';
 import {createNodeInterface} from 'graphql-sequelize';
 
-const db = {
+const db: any = {
   sequelize,
 };
 
@@ -14,7 +15,7 @@ fs
     file !== 'index.js',
   )
   .forEach((file) => {
-    const model = sequelize.import(path.join(__dirname, file));
+    const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
     db[model.name] = model;
   });
 
